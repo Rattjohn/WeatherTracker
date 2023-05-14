@@ -1,0 +1,56 @@
+.header {
+    background: linear-gradient(to right, #4456b3, 0%, #261360, 100%);
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: center;
+} 
+
+.sidebar {
+    float: left;
+    width: 250px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+#Search {
+    margin-top: 10px;
+}
+
+.sidebar button {
+    display: block;
+    margin-bottom: 10px;
+    width: 175px;
+}
+
+.display {
+    position: absolute;
+    margin-left: 265px;
+    margin-top: 10px;
+    border: solid 1px;
+    width: 70%;
+    
+}
+
+.weatherlist {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.forecast {
+    position: absolute;
+    margin-top: 185px;
+    margin-left: 265px;
+}
+
+.container {
+    display: flex;
+}
+.block {
+    display: inline-block;
+    width: 180px;
+    height: 200px;
+    background-color: navy;
+    margin-right: 10px;
+}
