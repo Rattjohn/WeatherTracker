@@ -14,8 +14,8 @@
     </div>
     <div class="sidebar">
         <h2>Search for a City:</h2>
-        <input type="text" placeholder="Search...">
-        <button class="btn btn-primary" id="Search" type="submit">Search</button>
+        <input id="search" type="text" placeholder="Search...">
+        <button class="btn btn-primary" id="search-btn" type="submit">Search</button>
         <hr>
         <button class="btn btn-secondary">Button 1</button>
         <button class="btn btn-secondary">Button 2</button>
@@ -31,30 +31,16 @@
             hello
         </h3>
         <div class="weatherlist">
-            <p>Temp <span id="temp"></span> </p>
-            <p>Wind <span id="wind"></span></p>
-            <p>Humidity <span id="Humid"></span></p>
+            <p>Temp: <span id="temp"></span> </p>
+            <p>Wind: <span id="wind"></span></p>
+            <p>Humidity: <span id="Humid"></span></p>
         </div>
     </div>
     <div class="forecast">
         <h4>5-Day Forcast:</h4>
-        <div class="container">
-            <div class="block">
+        <ul id="5Day" class="container">
 
-            </div>
-            <div class="block">
-
-            </div>
-            <div class="block">
-
-            </div>
-            <div class="block">
-
-            </div>
-            <div class="block">
-                
-            </div>
-        </div>
+        </ul>
     </div>
 
 

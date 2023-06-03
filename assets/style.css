@@ -49,8 +49,22 @@
 }
 .block {
     display: inline-block;
-    width: 180px;
+    width: 200px;
     height: 200px;
     background-color: navy;
     margin-right: 10px;
+}
+.forecast {
+    color: white;
+}
+
+.forecast h4 {
+    color: black;
+}
+
+.forecast p {
+    margin-left: 10px;
+}
+.date {
+    margin-left: 10px;
 }

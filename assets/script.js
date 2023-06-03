@@ -1,34 +1,77 @@
 const apiKEY = "10d6e35f53d0281c0ddd7a75c5ff1148"
 
-// Get the search bar and search button elements
-var searchBar = document.querySelector('input[type="text"]');
-var searchButton = document.querySelector('button[type="submit"]');
+const searchHistory = localStorage.getItem('search') || []
 
-// Get the button elements
-var buttons = document.querySelectorAll('button:not([type="submit"])');
+var temp = document.querySelector("#temp")
+var wind = document.querySelector("#wind")
+var humidity = document.querySelector("#Humid")
+var searchBar = document.querySelector("#search")
+var searchButton = document.querySelector("#search-btn")
+var cityTitle = document.querySelector("#city")
+var block = document.querySelectorAll(".block")
+var tempDisplay = document.querySelectorAll(".temp-dis")
+if(searchHistory.length > 0){
+  //append buttons to page
+}
 
-// Initialize the index to 0
-var index = 0;
+function weatherdisplay() {
+  var city = searchBar.value
+  searchHistory.push(city)
+  localStorage.setItem('search', searchHistory);
+  
+  var requestGeocodeUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKEY;
 
-// Add an event listener to the search button
-searchButton.addEventListener('click', function() {
-  // Get the user's input
-  var input = searchBar.value;
 
-  // If the input is not empty
-  if (input !== '') {
-    // Update the button text
-    buttons[index].textContent = input;
+  fetch(requestGeocodeUrl)
+    .then(res => res.json())
+    .then(dataGeo => {
+      console.log(dataGeo)
+      console.log(dataGeo.coord.lon)
+      const lat = dataGeo.coord.lat
+      const lon = dataGeo.coord.lon
+      cityTitle.textContent = dataGeo.name
+      temp.textContent = dataGeo.main.temp + "°F"
+      wind.textContent = dataGeo.wind.speed + "MPH"
+      humidity.textContent = dataGeo.main.humidity + "%"
+      var requestWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=10d6e35f53d0281c0ddd7a75c5ff1148&units=imperial`;
+      fetch(requestWeatherUrl)
+        .then(res => res.json())
+        .then(dataWeatherUrl => {
+          console.log(dataWeatherUrl)
+          const dtArray = dataWeatherUrl.list.filter(function (weatherObj) {
+            if (weatherObj.dt_txt.split(' ')[1] == '12:00:00') {
+              return weatherObj
+            }
+          });
+          const fiveDayUl = document.getElementById('5Day')
+          while(fiveDayUl.firstChild){
+            fiveDayUl.firstChild.remove()
+          }
+          for (let i = 0; i < dtArray.length; i++) {
+            const li = document.createElement('li');
+            const h5 = document.createElement('h5')
+            //const img = document.createElement('img')
 
-    // Increment the index
-    index++;
+            const tempP = document.createElement('p')
+            const humidP = document.createElement('p')
+            const windP = document.createElement('p')
 
-    // If the index is greater than or equal to 8, reset it to 0
-    if (index >= 8) {
-      index = 0;
-    }
+            tempP.textContent = `Temperature: ${dtArray[i].main.temp}°F`
+            humidP.textContent = `Humidity: ${dtArray[i].main.temp}%`
+            windP.textContent = `Wind: ${dtArray[i].wind.speed} MPH`
 
-    // Clear the search bar
-    searchBar.value = '';
-  }
-});
+            h5.textContent = `${dtArray[i].dt_txt.split(' ')[0]}`
+
+            li.classList.add('block')
+            li.append(h5, tempP,windP, humidP)
+
+            fiveDayUl.appendChild(li)
+          }
+        })
+    })
+}
+
+
+
+
+searchButton.addEventListener('click', weatherdisplay)
