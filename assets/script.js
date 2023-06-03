@@ -1,6 +1,6 @@
 const apiKEY = "10d6e35f53d0281c0ddd7a75c5ff1148"
 
-const searchHistory = localStorage.getItem('search') || []
+// const searchHistory = localStorage.getItem('search') || []
 
 var temp = document.querySelector("#temp")
 var wind = document.querySelector("#wind")
@@ -10,14 +10,14 @@ var searchButton = document.querySelector("#search-btn")
 var cityTitle = document.querySelector("#city")
 var block = document.querySelectorAll(".block")
 var tempDisplay = document.querySelectorAll(".temp-dis")
-if(searchHistory.length > 0){
-  //append buttons to page
-}
+// if(searchHistory.length > 0){
+//   //append buttons to page
+// }
 
 function weatherdisplay() {
   var city = searchBar.value
-  searchHistory.push(city)
-  localStorage.setItem('search', searchHistory);
+  // searchHistory.push(city)
+  // localStorage.setItem('search', searchHistory);
   
   var requestGeocodeUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKEY;
 
